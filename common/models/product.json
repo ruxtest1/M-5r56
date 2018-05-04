@@ -1,0 +1,151 @@
+{
+  "name": "Products",
+  "plural": "products",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "mysql": {
+      "table": "products"
+    }
+  },
+  "properties": {
+    "name_th": {
+      "type": "text"
+    },
+    "name_en": {
+      "type": "text"
+    },
+    "detail_th": {
+      "type": "text"
+    },
+    "detail_short_th": {
+      "type": "text"
+    },
+    "detail_en": {
+      "type": "text"
+    },
+    "detail_short_en": {
+      "type": "text"
+    },
+    "quantity": {
+      "type": "number"
+    },
+    "price1": {
+      "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 2,
+      "comment": "ราคาปลีก"
+    },
+    "price2": {
+      "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 2,
+      "comment": "ราคาพิเศษ"
+    },
+    "price_star1": {
+      "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 2,
+      "comment": "ราคาดาว"
+    },
+    "price_star2": {
+      "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 2,
+      "comment": "ราคาดาว"
+    },
+    "price_star3": {
+      "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 2,
+      "comment": "ราคาดาว"
+    },
+    "price_star4": {
+      "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 2,
+      "comment": "ราคาดาว"
+    },
+    "price_star5": {
+      "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 2,
+      "comment": "ราคาดาว"
+    },
+    "keywords": {
+      "type": "text"
+    },
+    "logo_path": {
+      "type": "text",
+      "comment": "รูปหลัก"
+    },
+    "image_gallery_path": {
+      "type": "text",
+      "comment": "รูปแกลรอรี่"
+    },
+    "category_id": {
+      "type": "number"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+
+    "created_at": {
+      "type": "date",
+      "defaultFn": "now"
+    },
+    "updated_at": {
+      "type": "date"
+    },
+    "deleted_at": {
+      "type": "date"
+    },
+    "created_by": {
+      "type": "number"
+    },
+    "updated_by": {
+      "type": "number"
+    },
+    "deleted_by": {
+      "type": "number"
+    }
+  },
+  "relations": {
+  },
+  "validations": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "rmProductFindByID"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "rmProductSearch"
+    }
+  ],
+  "methods": []
+}

@@ -1,0 +1,28 @@
+{
+  "restApiRoot": "/api",
+  "host": "0.0.0.0",
+  "port": 4942,
+  "remoting": {
+    "context": false,
+    "rest": {
+      "handleErrors": false,
+      "normalizeHttpPath": false,
+      "xml": false
+    },
+    "json": {
+      "strict": false,
+      "limit": "2mb"
+    },
+    "urlencoded": {
+      "extended": true,
+      "limit": "2mb"
+    },
+    "cors": false,
+    "handleErrors": false
+  },
+  "Image": {
+    "Resize": 400,
+    "Quality": 60
+  },
+  "host_api": "http://ruxnutt.thddns.net:4945/"
+}

@@ -1,0 +1,115 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "mysql",
+    "public": false
+  },
+  "AccessToken": {
+    "dataSource": "mysql",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mysql",
+    "public": false
+  },
+  "Roles": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "RoleMapping": {
+    "dataSource": "mysql",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "mysql",
+    "public": false
+  },
+  "Email": {
+    "dataSource": "mail",
+    "public": true
+  },
+  "Container": {
+    "dataSource": "storage",
+    "public": true
+  },
+  "Banks": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Categories": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Maps": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Products": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Vendors": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Videos": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "MapProductAttributes": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "MapAttributes": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Attributes": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "AttributeGroup": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "ADS": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "Promotions": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "ShippingMethods": {
+    "dataSource": "mysql",
+    "public": true
+  },
+
+  "Scuser": {
+    "dataSource": "mysql",
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": true
+        }
+      }
+    }
+  }
+}

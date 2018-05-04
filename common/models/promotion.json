@@ -1,0 +1,110 @@
+{
+  "name": "Promotions",
+  "plural": "promotions",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "mysql": {
+      "table": "promotions"
+    }
+  },
+  "properties": {
+    "title_th": {
+      "type": "text"
+    },
+    "title_en": {
+      "type": "text"
+    },
+    "detail_th": {
+      "type": "text"
+    },
+    "detail_en": {
+      "type": "text"
+    },
+    "start_date": {
+      "type": "date"
+    },
+    "end_date": {
+      "type": "date"
+    },
+    "star": {
+      "type": "number"
+    },
+    "discount_type": {
+      "type": "number"
+    },
+    "discount1": {
+      "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 2
+    },
+    "discount2": {
+      "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 2
+    },
+    "discount3": {
+      "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 2
+    },
+    "discount4": {
+      "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 2
+    },
+    "discount5": {
+      "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 2
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+
+
+    "created_at": {
+      "type": "date",
+      "defaultFn": "now"
+    },
+    "updated_at": {
+      "type": "date"
+    },
+    "deleted_at": {
+      "type": "date"
+    },
+    "created_by": {
+      "type": "number"
+    },
+    "updated_by": {
+      "type": "number"
+    },
+    "deleted_by": {
+      "type": "number"
+    }
+  },
+  "relations": {
+  },
+  "validations": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": []
+}

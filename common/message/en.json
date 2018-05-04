@@ -1,0 +1,149 @@
+{
+  "missing_month": "กรุณาระบุเดือน",
+  "accounts": {
+    "not_found": "ไม่พบข้อมูล Account",
+    "id_invalid": "กรุณาระบุ Account ID"
+  },
+  "property_types": {
+    "not_found": "ไม่พบข้อมูลประเภทโครงการ",
+    "id_invalid": "กรุณาระบุ ID ประเภทโครงการ"
+  },
+  "properties": {
+    "not_found": "ไม่พบข้อมูลโครงการ",
+    "msg_duplicate": "ชื่อโครงการมีอยู่แล้วในระบบ กรุณาเปลี่ยนชื่อโครงการ",
+    "schedule_type": {
+      "sign": "นัดเซ็นสัญญา",
+      "agreement_end": "หมดสัญญา",
+      "cleaning": "นัดทำความสะอาด",
+      "repair": "นัดซ่อมแซม"
+    },
+    "msg_schedule": "ห้อง _room_no อาคาร _building_name"
+  },
+  "buildings": {
+    "not_found": "ไม่พบข้อมูลอาคาร",
+    "msg_duplicate": "ชื่ออาคารมีอยู่แล้วในระบบ กรุณาเปลี่ยนชื่ออาคาร",
+    "id_invalid": "กรุณาระบุ ID อาคาร",
+    "msg_delete": "ไม่สามารถลบตึกได้เนื่องจากมีห้องพักอยู่"
+  },
+  "rooms": {
+    "not_found": "ไม่พบข้อมูลห้องพัก",
+    "id_invalid": "กรุณาระบุ ID ห้องพัก",
+    "msg_outstanding": "ค้างชำระ _total_amount",
+    "please_select_room": "กรุณาเลือกห้องพัก",
+    "msg_move_in": "ย้ายเข้า _date",
+    "msg_room_not_empty": "ห้อง \"_room_no\" ไม่ว่าง ไม่สามารถทำสัญญาได้",
+    "msg_activity": {
+      "outstanding": "มียอดค้างชำระ",
+      "cleaning": "นัดทำความสะอาด"
+    },
+    "msg_status": {
+      "empty": "ห้องว่าง",
+      "have_tenant": "มีผู้เช่า",
+      "move_out": "ย้ายออก",
+      "booking": "ถูกจอง"
+    },
+    "msg_not_change_status": "ไม่สามารถเปลี่ยนถานะจาก \"_from\" เป็นสถานะ \"_to\""
+  },
+  "bookings": {
+    "not_found": "ไม่พบข้อมูลผู้จอง",
+    "msg_booking": "จองห้อง",
+    "agreement_sign_date": "วันนัดเซ็นสัญญา",
+    "msg_agreement_sign_date": "นัดเซ็นสัญญา _date"
+  },
+  "reservations": {
+    "not_found": "ไม่พบข้อมูลการจอง"
+  },
+  "contracts": {
+    "not_found": "ไม่พบข้อมูลสัญญาเช่า",
+    "id_invalid": "กรุณาระบุ ID สัญญาเช่า",
+    "data_invalid": "กรุณาระบุข้อมูลสัญญาเช่า",
+    "duplicate_username": "Username ซ้ำไม่สามารถบันทึกได้!"
+  },
+  "tenants": {
+    "not_found": "ไม่พบข้อมูลผู้เช่า",
+    "data_invalid": "กรุณาระบุข้อมูลผู้เช่า"
+  },
+  "Scuser": {
+    "not_found": "ไม่พบข้อมูลผู้ใช้งาน",
+    "email_not_found": "ไม่พบข้อมูล Email: ",
+    "email_not_verified": "ผู้ใช้งานของท่าน ยังไม่ได้รับกานยืนยัน กรุณาตรวจสอบอีเมล",
+    "duplicate_username": "ข้อมูล Username มีอยู่แล้วในระบบ",
+    "duplicate_email": "ข้อมูลอีเมลมีอยู่แล้วในระบบ",
+    "login_fail": "รหัสผ่านของคุณไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง"
+  },
+  "moveOuts": {
+    "not_found": "ไม่พบข้อมูลการย้ายออก",
+    "msg_move_out": "ย้ายออก _date",
+    "msg_duplicate": "ข้อมูลการย้ายออกถูกสร้างไว้แล้ว",
+    "msg_payment_move_out": "กรุณาบันทึกการชำระเงินก่อน",
+    "msg_move_out_finish": "ห้อง \"_room_no\" ทำการย้ายออกเสร็จแล้ว กรุณาตรวจสอบ",
+    "msg_step2_not_found": "กรุณาทำรายการขั้นที่ 2 ก่อน",
+    "mst_step2_not_delete": "ไม่สามารถลบข้อมูลการย้ายออกได้แล้ว"
+  },
+  "cleanings": {
+    "not_found": "ไม่พบข้อมูลการทำความสะอาด",
+    "msg_cleaning": "ทำความสะอาด _date"
+  },
+  "roomTypes": {
+    "not_found": "ไม่พบข้อมูลประเภทห้องพัก",
+    "msg_duplicate": "ข้อมูลชื่อประเภทห้อง \"_name\" มีอยู่แล้วในอาคาร",
+    "can_not_delete": "ข้อมูลประเภทห้องพักมีการใช้งานอยู่ ไม่สามารถลบได้"
+  },
+  "waitingLists": {
+    "not_found": "ไม่พบข้อมูลผู้สนใจห้องพัก"
+  },
+  "invoices": {
+    "not_found": "ไม่พบข้อมูลใบแจ้งหนี้",
+    "can_not_edit": "ขออภัย! ไม่สามารถแก้ไขใบแจ้งหนี้ \"_iv\" ได้แล้ว",
+    "msg_invoice_detail_type": {
+      "rental": "ค่าเช่า",
+      "water_cost": "ค่าน้ำ",
+      "electric_cost": "ค่าไฟ",
+      "facility_cost": "ค่าสิ่งอำนวยความสะดวก",
+      "cleaning_cost": "ค่าทำความสะอาด",
+      "repair_cost": "ค่าซ่อมแซม",
+      "mulct": "ค่าปรับ",
+      "discount": "ส่วนลด",
+      "booking": "เงินจอง",
+      "deposit": "เงินประกัน",
+      "other_cost": "ค่าอื่นๆ"
+    },
+    "msg_invoice_type": {
+      "rental": "ค่าเช่า",
+      "booking": "ค่าจอง",
+      "deposit": "เงินประกัน",
+      "move_out": "ย้ายออก"
+    },
+    "msg_sign_is_not_begin": "ห้อง _room_no ยังไม่ถึงวันเริ่มสัญญาไม่สามารถบันทึกค่าเช่าได้",
+    "msg_sign_is_begin": "ห้อง _room_no เพิ่งเริ่มสัญญาได้ 1 เดือนไม่สามารถคิดค่าเช่า",
+    "msg_sign_is_end": "ห้อง _room_no หมดสัญญาแล้วไม่คิดค่าเช่า",
+    "msg_sign_after_end": "ห้อง _room_no หมดสัญญาเดือน_month ไม่สามารถบันทึกค่าเช่าได้",
+    "msg_rental_not_first_month": "ห้อง _room_no ค่าเช่าเดือนแรกได้ชำระไว้แล้ว",
+    "msg_rental_across_month": "ห้อง _room_no ยังไม่ได้บันทึกค่าเช่าเดือน_month",
+    "msg_rental_duplicate": "ห้อง _room_no บันทึกค่าเช่าเดือน_month เรียบร้อยแล้ว"
+  },
+  "payments": {
+    "not_found": "ไม่พบข้อมูลการชำระเงิน",
+    "type_name": {
+      "cash": "เงินสด",
+      "bank": "ธนาคาร"
+    }
+  },
+  "expenses": {
+    "not_found": "ไม่พบข้อมูลค่าใช้จ่าย",
+    "expense_type_name": {
+      "deposit": "เงินประกัน",
+      "pledge": "เงินมัดจำ"
+    }
+  },
+  "member": {
+    "not_found": "ไม่พบข้อมูลสมาชิก",
+    "please_specify_an_old_password": "กรุณาระบุรหัสผ่านเก่า",
+    "please_specify_a_new_password": "กรุณาระบุรหัสผ่านใหม่",
+    "please_specify_a_confirm_password": "กรุณายืนยันรหัสผ่านใหม่",
+    "old_password_is_valid": "รหัสผ่านเก่าไม่ถูกต้อง",
+    "new_password_does_not_math": "รหัสผ่านใหม่ กับรหัสผ่านยืนยัน ไม่เหมือนกัน",
+    "email_already_exists": "ข้อมูลอีเมล มีอยู่แล้วในระบบ",
+    "please_specify_email": "กรุณาระบุที่อยู่อีเมล"
+  }
+}

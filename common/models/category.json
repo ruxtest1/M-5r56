@@ -1,0 +1,98 @@
+{
+  "name": "Categories",
+  "plural": "categories",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "mysql": {
+      "table": "categories"
+    }
+  },
+  "properties": {
+    "name_th": {
+      "type": "text"
+    },
+    "name_en": {
+      "type": "text"
+    },
+    "detail_th": {
+      "type": "text"
+    },
+    "detail_en": {
+      "type": "text"
+    },
+    "parent": {
+      "type": "number"
+    },
+    "order": {
+      "type": "number"
+    },
+    "image_icon": {
+      "type": "text"
+    },
+
+
+    "created_at": {
+      "type": "date",
+      "defaultFn": "now"
+    },
+    "updated_at": {
+      "type": "date"
+    },
+    "deleted_at": {
+      "type": "date"
+    },
+    "created_by": {
+      "type": "number"
+    },
+    "updated_by": {
+      "type": "number"
+    },
+    "deleted_by": {
+      "type": "number"
+    }
+  },
+  "relations": {
+  },
+  "validations": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "rmFindCategoryMain"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "rmFindCategoryGroup"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "rmFindCategorySub"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "rmCategoryGetProduct"
+    }
+  ],
+  "methods": []
+}

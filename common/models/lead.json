@@ -1,0 +1,104 @@
+{
+  "name": "Leads",
+  "plural": "leads",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "mysql": {
+      "table": "leads"
+    }
+  },
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "company_name": {
+      "type": "string"
+    },
+    "customer_name": {
+      "type": "string"
+    },
+    "tel": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "number_of_computer": {
+      "type": "number"
+    },
+    "issue": {
+      "type": "text"
+    },
+    "demand": {
+      "type": "text"
+    },
+    "date_of_survey": {
+      "type": "date"
+    },
+    "survey_date": {
+      "type": "date"
+    },
+    "quotation_date": {
+      "type": "date"
+    },
+    "follow_date1": {
+      "type": "date"
+    },
+    "follow_date2": {
+      "type": "date"
+    },
+    "follow_date3": {
+      "type": "date"
+    },
+    "detail": {
+      "type": "text"
+    },
+    "responsibility": {
+      "type": "text"
+    },
+    "noti_follow_date": {
+      "type": "date"
+    },
+
+
+    "created_at": {
+      "type": "date",
+      "defaultFn": "now"
+    },
+    "updated_at": {
+      "type": "date"
+    },
+    "deleted_at": {
+      "type": "date"
+    },
+    "create_by": {
+      "type": "string"
+    },
+    "update_by": {
+      "type": "string"
+    },
+    "delete_by": {
+      "type": "string"
+    }
+  },
+  "relations": {
+  },
+  "validations": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": []
+}

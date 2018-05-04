@@ -1,0 +1,28 @@
+{
+  "type": "log",
+  "show": {
+    "tags": true,
+    "location": true,
+    "time": true,
+    "date": false
+  },
+  "context": {
+    "tags": [
+      "access_token",
+      "Af0T2yAyrvsbXhlOkyPsUb7OiYXy74mULqZqXE58OwYJuIygdqBGUlexFfJ9iob3",
+      "sql"
+    ],
+    "file": true,
+    "time": 1499395849130,
+    "location": {
+      "filename": "sz.js",
+      "line": 462
+    }
+  },
+  "args": {
+    "0": "            SELECT                a.`account_id`,                b.`id` AS property_id,                b.`name` AS property_name,                c.`name` AS property_type_name,                c.`id` AS property_type_id,                a.`id` AS building_id,                a.`name` AS building_name,                a.image_path            FROM                `buildings` a            INNER JOIN `properties` b                ON (a.`property_id` = b.`id`)            INNER JOIN `property_types` c                ON (b.`property_type_id` = c.`id`)            WHERE 1                AND a.`deleted_at` IS NULL AND a.id=NaN"
+  },
+  "contextString": "[access_token][Af0T2yAyrvsbXhlOkyPsUb7OiYXy74mULqZqXE58OwYJuIygdqBGUlexFfJ9iob3][sql] [sz.js:462] 2017-07-07T02:50:49.130Z ",
+  "argsString": "            SELECT                a.`account_id`,                b.`id` AS property_id,                b.`name` AS property_name,                c.`name` AS property_type_name,                c.`id` AS property_type_id,                a.`id` AS building_id,                a.`name` AS building_name,                a.image_path            FROM                `buildings` a            INNER JOIN `properties` b                ON (a.`property_id` = b.`id`)            INNER JOIN `property_types` c                ON (b.`property_type_id` = c.`id`)            WHERE 1                AND a.`deleted_at` IS NULL AND a.id=NaN",
+  "message": "[access_token][Af0T2yAyrvsbXhlOkyPsUb7OiYXy74mULqZqXE58OwYJuIygdqBGUlexFfJ9iob3][sql] [sz.js:462] 2017-07-07T02:50:49.130Z             SELECT                a.`account_id`,                b.`id` AS property_id,                b.`name` AS property_name,                c.`name` AS property_type_name,                c.`id` AS property_type_id,                a.`id` AS building_id,                a.`name` AS building_name,                a.image_path            FROM                `buildings` a            INNER JOIN `properties` b                ON (a.`property_id` = b.`id`)            INNER JOIN `property_types` c                ON (b.`property_type_id` = c.`id`)            WHERE 1                AND a.`deleted_at` IS NULL AND a.id=NaN"
+}

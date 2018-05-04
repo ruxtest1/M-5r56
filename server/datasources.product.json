@@ -1,0 +1,39 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mysql": {
+    "name": "mysql",
+    "host": "localhost",
+    "port": 3306,
+    "url": "",
+    "database": "marukyo",
+    "user": "dev",
+    "password": "",
+    "connector": "mysql",
+    "socketPath": "/var/run/mysqld/mysqld.sock"
+  },
+  "mail": {
+    "name": "mail",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "SMTP",
+        "host": "smtp.gmail.com",
+        "secure": true,
+        "port": 465,
+        "auth": {
+          "user": "user.sendemail@gmail.com",
+          "pass": "send1234"
+        }
+      }
+    ]
+  },
+  "storage": {
+    "name": "storage",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "./uploads"
+  }
+}

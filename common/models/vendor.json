@@ -1,0 +1,116 @@
+{
+  "name": "Vendors",
+  "plural": "vendors",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "mysql": {
+      "table": "vendors"
+    }
+  },
+  "properties": {
+    "user_id": {
+      "type": "number"
+    },
+    "username": {
+      "type": "text"
+    },
+    "password": {
+      "type": "text"
+    },
+    "company_name_th": {
+      "type": "text"
+    },
+    "company_name_en": {
+      "type": "text"
+    },
+    "name_th": {
+      "type": "text"
+    },
+    "name_en": {
+      "type": "text"
+    },
+    "line_id": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "address_th": {
+      "type": "text"
+    },
+    "address_en": {
+      "type": "text"
+    },
+    "city_th": {
+      "type": "text"
+    },
+    "city_en": {
+      "type": "text"
+    },
+    "file_certificate": {
+      "type": "text"
+    },
+    "image_card_no_path": {
+      "type": "text"
+    },
+    "image_front_store_path": {
+      "type": "text"
+    },
+    "lat": {
+      "type": "text"
+    },
+    "long": {
+      "type": "text"
+    },
+    "map_url": {
+      "type": "text"
+    },
+    "star": {
+      "type": "number"
+    },
+
+
+    "created_at": {
+      "type": "date",
+      "defaultFn": "now"
+    },
+    "updated_at": {
+      "type": "date"
+    },
+    "deleted_at": {
+      "type": "date"
+    },
+    "created_by": {
+      "type": "number"
+    },
+    "updated_by": {
+      "type": "number"
+    },
+    "deleted_by": {
+      "type": "number"
+    }
+  },
+  "relations": {
+  },
+  "validations": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": []
+}

@@ -329,5 +329,3 @@ package-lock.json
 .idea/
 common/db/
 common/mockup/
-uploads/
-uploads2/

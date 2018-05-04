@@ -4,7 +4,7 @@
   "main": "server/server.js",
   "scripts": {
     "lint": "eslint .",
-    "start": "pm2 start nodemon --watch common --watch server server/server.js",
+    "start": "node server/server.js",
     "posttest": "npm run lint && nsp check",
     "build:sdk-ng2": "./node_modules/.bin/lb-sdk server/server client/sdk/angular2 -d ng2web -i disabled"
   },

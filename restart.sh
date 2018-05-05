@@ -1,7 +1,7 @@
 #!/bin/bash
 
 NAME=marukyo-api
-export NODE_ENV=product
+export NODE_ENV=producttion
 IP=$(hostname -I | cut -d" " -f 1)
 export NODE_IP=$IP
 

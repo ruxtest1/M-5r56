@@ -7,6 +7,6 @@ export NODE_IP=$IP
 
 git pull
 
-pm2 restart $NAME
+pm2 start ecosystem.config.json --env=producttion --name
 
 pm2 log $NAME

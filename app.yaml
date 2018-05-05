@@ -1,5 +1,5 @@
 runtime: nodejs
-env: flex
+env: production
 
 env_variables:
   NODE_ENV: "production"

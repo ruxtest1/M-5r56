@@ -11,7 +11,9 @@
     "database": "marukyo",
     "user": "marukyo",
     "password": "4tE4WYr2p9gf86Q",
-    "connector": "mysql"
+    "connector": "mysql",
+    "connectTimeout": 20000,
+    "acquireTimeout": 20000
   },
   "mail": {
     "name": "mail",

@@ -9,12 +9,11 @@
     "port": 3306,
     "url": "",
     "database": "marukyo",
-    "user": "root",
-    "password": "6q9352c4pt273hy",
+    "user": "marukyo",
+    "password": "4tE4WYr2p9gf86Q",
     "connector": "mysql",
     "connectTimeout": 20000,
-    "acquireTimeout": 20000,
-    "socketPath":"/cloudsql/marukyo-203113:asia-south1:marukyo"
+    "acquireTimeout": 20000
   },
   "mail": {
     "name": "mail",

@@ -5,7 +5,7 @@
   },
   "mysql": {
     "name": "mysql",
-    "host": "localhost",
+    "host": "35.200.192.96",
     "port": 3306,
     "url": "",
     "database": "marukyo",

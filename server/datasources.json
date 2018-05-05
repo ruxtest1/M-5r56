@@ -5,7 +5,7 @@
   },
   "mysql": {
     "name": "mysql",
-    "host": "localhost",
+    "host": "35.200.192.96",
     "port": 3306,
     "url": "",
     "database": "marukyo",
@@ -13,7 +13,8 @@
     "password": "6q9352c4pt273hy",
     "connector": "mysql",
     "connectTimeout": 20000,
-    "acquireTimeout": 20000
+    "acquireTimeout": 20000,
+    "socketPath":"/cloudsql/marukyo-203113:asia-south1:marukyo"
   },
   "mail": {
     "name": "mail",

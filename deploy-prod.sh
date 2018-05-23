@@ -2,7 +2,7 @@
 
 git pull
 
-npm install
+#npm install
 
 #deploy to google cloud
 gcloud app deploy

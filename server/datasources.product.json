@@ -5,14 +5,14 @@
   },
   "mysql": {
     "name": "mysql",
-    "host": "localhost",
+    "host": "35.200.220.75",
     "port": 3306,
     "url": "",
     "database": "marukyo",
-    "user": "dev",
-    "password": "",
+    "user": "local",
+    "password": "h36qRXwgNF54",
     "connector": "mysql",
-    "socketPath": "/var/run/mysqld/mysqld.sock"
+    "socketPath":"/cloudsql/marukyo-api:asia-south1:marukyo"
   },
   "mail": {
     "name": "mail",

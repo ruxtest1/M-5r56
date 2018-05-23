@@ -11,7 +11,8 @@
     "database": "marukyo",
     "user": "local",
     "password": "h36qRXwgNF54",
-    "connector": "mysql"
+    "connector": "mysql",
+    "socketPath":"/cloudsql/marukyo-api:asia-south1:marukyo"
   },
   "mail": {
     "name": "mail",

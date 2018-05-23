@@ -700,7 +700,7 @@ function fnSz() {
         if (sz.showLog) {
           console.file().time().tag('data').log(JSON.stringify(data));
         }
-        let userData = app.userData;
+        let userData = app.userData || {};
         data.created_by = userData.id || 0;
         model.create(data, ts, function (err, res) {
           if (err) {
@@ -731,7 +731,7 @@ function fnSz() {
     data.updated_at = sz.dnow(true);
     return new Promise(async function (resolve, reject) {
       try {
-        let userData = app.userData;
+        let userData = app.userData || {};
         data.updated_by = userData.id || 0;
         if (sz.showLog) {
           console.file().time().tag('data').log(JSON.stringify(data));
@@ -807,7 +807,7 @@ function fnSz() {
         if (sz.showLog) {
           console.file().time().tag('data').log(JSON.stringify(data));
         }
-        let userData = app.userData;
+        let userData = app.userData || {};
         data.deleted_by = userData.id || '';
         const model = typeof models == 'string' ? app.models[models] : models;
         let res = await model.updateAll({id: id}, data, ts);
@@ -823,7 +823,7 @@ function fnSz() {
 
   this.fnMarkDeleteFromOld = function (data) {
     data.deleted_at = this.dnow(true);
-    let userData = app.userData;
+    let userData = app.userData || {};
     data.deleted_by = userData.id || '';
     data.save();
   };
@@ -1176,22 +1176,27 @@ function fnSz() {
   };
 
   this.fnRemoveFile = (pathFile) => {
-    try {
-      let pathToRoot = '../../';
-      let fs = require('fs');
-      if (this.fnCheckFileExists(pathFile)) {
-        fs.unlink(path.join(__dirname, pathToRoot + pathFile), function (err) {
-          if (err) {
-            return false;
+    let e = this;
+      return new Promise(function (resolve, reject) {
+        try {
+          let pathToRoot = '../../';
+          let fs = require('fs');
+          if (e.fnCheckFileExists(pathFile)) {
+              fs.unlink(path.join(__dirname, pathToRoot + pathFile), function (err) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(true);
+                }
+              });
           }
-        });
-      }
-      return true;
-    }
-    catch (e) {
-      console.log("error delete file.");
-      return false;
-    }
+            resolve(true);
+        }
+        catch (e) {
+          console.log("error delete file.");
+            reject(e);
+        }
+      });
   };
 
   this.fnRandomStr = function (length) {

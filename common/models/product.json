@@ -138,7 +138,7 @@
       "principalType": "ROLE",
       "principalId": "$everyone",
       "permission": "ALLOW",
-      "property": "rmProductFindByID"
+      "property": "rmBuyProductFindByID"
     },
     {
       "principalType": "ROLE",

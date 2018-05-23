@@ -86,11 +86,11 @@ module.exports = function (Vendors) {
       try {
         body.file_certificate = sz.fnJson2Str(body.file_certificate);
         body.image_front_store_path = sz.fnJson2Str(body.image_front_store_path);
-
         let Transaction = await Vendors.beginTransaction('READ COMMITTED');
         sz.Transaction = Transaction;
         console.time().file().tag('Transaction').log(Transaction);
         let ts = {transaction: Transaction};
+        console.log(body)
         let res = await sz.fnModelCreate(body, Vendors, ts);
         await Transaction.commit();
         sz._20000(res);

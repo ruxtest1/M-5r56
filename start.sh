@@ -10,7 +10,7 @@ pm2 delete $NAME
 git pull
 
 #pm2 start server/server.js --name $NAME
-pm2 start ecosystem.config.json --env=production
+pm2 start ecosystem.config.json --env=product
 
 
 #gulp set config

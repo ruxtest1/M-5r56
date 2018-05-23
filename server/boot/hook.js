@@ -24,7 +24,13 @@ module.exports = function (app) {
                 app.resMsg = require('../../common/message/en.json');
             }
             if (sz.checkData(req.accessToken.userId)) {
-                app.userData = await sz.fnFindById(req.accessToken.userId, sz.userModel)
+                let userData = await sz.fnFindById(req.accessToken.userId, sz.userModel);
+                let vendor = await sz.fnFindOne({user_id: req.accessToken.userId}, app.models.Vendors);
+                userData.vendor = null;
+                if (sz.checkData(vendor)) {
+                    userData.vendor = vendor;
+                }
+                app.userData = userData;
             }
         } catch (err) {
         }

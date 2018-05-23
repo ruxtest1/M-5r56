@@ -9,11 +9,10 @@
     "port": 3306,
     "url": "",
     "database": "marukyo",
-    "user": "marukyo",
-    "password": "4tE4WYr2p9gf86Q",
+    "user": "dev",
+    "password": "",
     "connector": "mysql",
-    "connectTimeout": 20000,
-    "acquireTimeout": 20000
+    "socketPath": "/var/run/mysqld/mysqld.sock"
   },
   "mail": {
     "name": "mail",

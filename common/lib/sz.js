@@ -1009,6 +1009,8 @@ function fnSz() {
       date_time: momentObj.format('YYYY-MM-DD HH:mm'),
       time: momentObj.valueOf(),
       time_of_date: momentDate.valueOf(),
+      str_date: momentDate.format('YYYYMMDD'),
+      str_date_time: momentDate.format('YYYYMMDDHHmm'),
       date_start_of_month: startOfMonth.format('YYYY-MM-DD'),
       date_end_of_month: endOfMonth.format('YYYY-MM-DD'),
       date_start_of_year: startOfYear.format('YYYY-MM-DD'),

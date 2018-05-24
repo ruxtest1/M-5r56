@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "marukyo-api",
+  "private_key_id": "14f34710832cd417aa84106c99b199199d4082fa",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQD3JBCaj6e7Vgtr\ntBW+J9mS9NcJ/lzf6KrhkBXQWXTsZbp1T7dSghGJkHQJutdbQVYTtRGj4FFwB2wS\nrl97p49IYgkuNoNk3njU8IZvjFxD9gUFdS0mett4b3WG7ZtZcJt48JGzjbyBgfYO\nxzM/jYHgks2MtN/mnLLrO6Nq7nZgKObPyNjHiF/C9xwx23HXFr/CVUTq1leEGTBo\nTIEPsDq9NrsJApm07TFNQZFwxAy6IcCHWzx3fkgG0lCPits4lXJWZa1wIdj7wz+T\nKNgaYH2z9DZ09BJD04jAlMNj+ilj7a/tb1Fe9DbrF7ncdTRpDYfrJM7JhX36Dteq\n8lnSOuPDAgMBAAECggEAEn7lXtCqEpsya8/3u2b1FNcncfm423Y1guY+U7AjAxjr\n6iENc1EFQ5PT5orp2H9pYNX+XEYKu9HtlL2H3m1Ti+zv8Sbzd2zIHNUxYnWRNCVC\no/FsiYKZT6HPAspgHXX2R+6AVDBv1dgzLeqN9QKMoHd47aZduVircgjHedaF3AiE\nWHJO+4wOeNMgCloYzWOnJZfJX/LAiBp/vYu/e1ZPJioLs4vHko15EUebuxdlVj7g\nOa64Sn63Yjrg1wfKZN0t+x3KPypjtklt2ECxAuKgbySzXAzKMcIbT/hk3zKum2Sg\nxJHYszjxjFIf+bElaZYSLTS2dhQ3hVWhw/YR+QyBLQKBgQD/0tG74kC5kZSYb724\n5lgZ0oKaQS/n3qwjQioNqpmeb64xGuiP/oFhWQxUdPPp1ojkr3x0xn53GdLvKiK5\nHEFOIMVzFkayIFTGfX2d3UvV+wzqleqUoqbtg3A+ejhE014MhUxsClDNKPPepMGm\nYgGinGHCI6k2saxe0EFAIyoZ/QKBgQD3T7ZPvFdn44/+bYGe2VPFrJFwwYR2qzEh\nIHYrefTPVcvLKzkNF9cmYsYGsMrA5spvV8Fyq6N0CD7JzmPOFaYseN1i9KdSz8jj\ncWjqdG0VJ9DSNSlDv4veZNd6OAP4ookATEzQqGn6vec7csTndNrVo9W3S0sKhnkO\nifnQ/w+AvwKBgQDrA5NllQ58636lI1IZgJLC9h7A8s29p1Rf97KGZ4lEgbh2qA+p\n6NaWxaWMGPzSfyG3ZHdjF86qP3EGAaFwiMJ9saFyfq5niUgYKMSzt86pPz64awzb\niyjq3WrKGqGCqOKngfWY80kTkGGo0ZaM8VArQJqWLQiQlFyTpaGr+CH/SQKBgQC6\nrUvDQjqD68zcU1J9UjSeyJT8FMblQHGUPMmWJbd57ZwoHtcwn+dCTVqG4FobY9o4\nU3htE0wNINAsSoMho0vM0+rgcCYBJ2DO9eMo3nscdfJ1SbV9Mw/j7iCMW837lsxt\nEisFcaqVn1T0lbw1rgolK0b91XKuXjTwmYudi3nrRwKBgQDqnvfsXGXuUaBf0Z9X\n8cK/GBdPMbpsoP9YF9GkQBqgn5mkMxdOy+0j4Rq7c2iudvm1COPwal6+7TeYUfax\nmf/Gdvzs/9PkPBWv6Hp2epCXlP4BM1Qvts9yA9XJB6pSnWQ2zBjibQZmLIikWTWD\nEsrz+W+akN15+LyKYlnUwqU8mw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "data-storage@marukyo-api.iam.gserviceaccount.com",
+  "client_id": "110420866294956820883",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/data-storage%40marukyo-api.iam.gserviceaccount.com"
+}

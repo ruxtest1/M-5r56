@@ -9,6 +9,8 @@
     "build:sdk-ng2": "./node_modules/.bin/lb-sdk server/server client/sdk/angular2 -d ng2web -i disabled"
   },
   "dependencies": {
+    "@google-cloud/datastore": "^1.4.0",
+    "@google-cloud/storage": "^1.7.0",
     "@mean-expert/loopback-component-realtime": "^1.0.0-rc.9.3",
     "@mean-expert/loopback-sdk-builder": "^2.1.0-rc.12.2",
     "async": "^2.6.0",

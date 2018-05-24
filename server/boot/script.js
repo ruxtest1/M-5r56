@@ -24,8 +24,9 @@ module.exports = function (app) {
     // let genName = (new Date()).getTime()+'_'+parts[parts.length-2] + '-' + rand;
     // return md5(genName) + '.' + extension;
     if (isRandomNameImg) {
-      let rand = sz.fnRandomStr();
-      origName += '-' + rand;
+      let objDate = sz.fnObjDate();
+      let rand = sz.fnRandomStr(5);
+      origName = objDate.str_date_time + rand;
     }
     origName += '.' + extension;
     return origName;

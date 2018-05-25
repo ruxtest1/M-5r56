@@ -131,6 +131,9 @@ module.exports = function (Vendors) {
         }
         let res = await sz.fnModelUpdate(vendor_id, body, Vendors, ts);
         await Transaction.commit();
+
+          //เช็คเพื่อลบรูป from google
+          await app.models.Container.fnCheckDeleteFileGoogle(body.delete_file || null);
         sz._20000(res);
       } catch (err) {
 

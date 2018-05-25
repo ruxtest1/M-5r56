@@ -198,22 +198,22 @@ module.exports = function (Products) {
         if (sz.checkData(data)) {
             // data = sz.fnConvertArrayShortDate(data, ['created_at']);
             // data = sz.fnDeleteKey(data, ['updated_at', 'deleted_at']);
-            data = Products.fnSetPathImgThumb(data, 'logo_path');
+            // data = Products.fnSetPathImgThumb(data, 'logo_path');
 
             data.image_gallery_path = sz.fnStr2Json(data.image_gallery_path);
-            if (sz.checkData(data.image_gallery_path)) {
-                let newGallery = [];
-                for (let i in data.image_gallery_path) {
-                    let rowI = data.image_gallery_path[i];
-                    rowI = Products.fnSetPathImgThumb(rowI, 'path');
-                    if (rowI.path) {
-                        newGallery.push(rowI)
-                    }
-                }
-                data.image_gallery_path = newGallery;
-            } else {
-                data.image_gallery_path = [];
-            }
+            // if (sz.checkData(data.image_gallery_path)) {
+            //     let newGallery = [];
+            //     for (let i in data.image_gallery_path) {
+            //         let rowI = data.image_gallery_path[i];
+            //         rowI = Products.fnSetPathImgThumb(rowI, 'path');
+            //         if (rowI.path) {
+            //             newGallery.push(rowI)
+            //         }
+            //     }
+            //     data.image_gallery_path = newGallery;
+            // } else {
+            //     data.image_gallery_path = [];
+            // }
 
             //get attribute
             let mapProductAttributeModel = app.models.MapProductAttributes,
@@ -348,7 +348,7 @@ module.exports = function (Products) {
                 let data = await sz.fnModelFindPaging(filters);
                 for (let i in data.rows) {
                     let val = data.rows[i];
-                    val = Products.fnSetPathImgThumb(val, 'logo_path');
+                    // val = Products.fnSetPathImgThumb(val, 'logo_path');
                     val = Products.fnBuildProductPrice(val);
                     data.rows[i] = val;
                 }

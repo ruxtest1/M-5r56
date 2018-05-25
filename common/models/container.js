@@ -423,9 +423,9 @@ module.exports = function (Container) {
                                     url: Container.url_google_file + file.container + '/' + objPath.name,
                                     name: objPath.name,
                                     path: file.container + '/' + objPath.name,
-                                    url_thumbnail: Container.url_google_file + file.container + '/' + thumbnailName,
+                                    url_thumbnail: thumbnailName ? Container.url_google_file + file.container + '/' + thumbnailName : thumbnailName,
                                     name_thumbnail: thumbnailName,
-                                    path_thumbnail: file.container + '/' + thumbnailName,
+                                    path_thumbnail: thumbnailName ? file.container + '/' + thumbnailName : thumbnailName,
                                 };
                             }
                         }

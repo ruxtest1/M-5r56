@@ -92,7 +92,7 @@ module.exports = function (Categories) {
                 let multiFn = [];
                 for (let i in data) {
                     let rowI = data[i];
-                    data[i] = Categories.fnSetPathImgThumb(data[i], 'image_icon');
+                    // data[i] = Categories.fnSetPathImgThumb(data[i], 'image_icon');
                     multiFn.push(Categories.fnGetChild(rowI.id));
                 }
                 let values = await sz.fnPromiseAll(multiFn);
@@ -103,7 +103,7 @@ module.exports = function (Categories) {
 
                     let value = values[i];
                     for (let j in value) {
-                        value[j] = Categories.fnSetPathImgThumb(value[j], 'image_icon');
+                        // value[j] = Categories.fnSetPathImgThumb(value[j], 'image_icon');
                         value[j].expanded = true;
                         value[j].text = value[j].name_th;
                     }
@@ -122,7 +122,7 @@ module.exports = function (Categories) {
             try {
                 let data = await Categories.fnGetChild(null);
                 for (let i in data) {
-                    data[i] = Categories.fnSetPathImgThumb(data[i], 'image_icon');
+                    // data[i] = Categories.fnSetPathImgThumb(data[i], 'image_icon');
                 }
                 sz._20000(data);
             } catch (err) {
@@ -138,7 +138,7 @@ module.exports = function (Categories) {
                 let main_id = req.query.main_id;
                 let data = await Categories.fnGetChild(main_id);
                 for (let i in data) {
-                    data[i] = Categories.fnSetPathImgThumb(data[i], 'image_icon');
+                    // data[i] = Categories.fnSetPathImgThumb(data[i], 'image_icon');
                 }
                 sz._20000(data);
             } catch (err) {
@@ -262,7 +262,7 @@ module.exports = function (Categories) {
         (async () => {
             try {
                 let data = await sz.fnFindById(category_id, Categories);
-                data = Categories.fnSetPathImgThumb(data, 'image_icon');
+                // data = Categories.fnSetPathImgThumb(data, 'image_icon');
                 sz._20000(data);
             } catch (err) {
                 sz._50000(err);
@@ -291,7 +291,7 @@ module.exports = function (Categories) {
                 let data = await app.models.Products.find(filter);
 
                 for (let i in data) {
-                    data[i] = app.models.Products.fnSetPathImgThumb(data[i], 'logo_path');
+                    // data[i] = app.models.Products.fnSetPathImgThumb(data[i], 'logo_path');
                     data[i] = app.models.Products.fnBuildProductPrice(data[i]);
                 }
                 // let sql = 'select * from products where deleted_at is null and enabled is true ';

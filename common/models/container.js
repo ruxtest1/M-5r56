@@ -115,6 +115,24 @@ module.exports = function (Container) {
         return fnDel();
     };
 
+    Container.fnCheckDeleteFileGoogle = async (files) => {
+        if (sz.checkData(files)) {
+            for(let file of files) {
+                try {
+                    await Container.fnDeleteFileGoogle(file);
+                } catch (err){
+                    console.log('err:', err);
+                }
+                try {
+                    await Container.fnDeleteFileGoogle(sz.fnGetPathImgThumb(file));
+                } catch (err){
+                    console.log('err thumbnail:', err);
+                }
+            }
+        }
+        return true;
+    };
+
     Container.fnUploadToGoogle = async (container, path, fileName) => {
         var gcs = storage({
             projectId: Container.google_bucket_name,
@@ -240,6 +258,33 @@ module.exports = function (Container) {
                 //     data.push(res);
                 // }/api/containers/products/download/ตะกั่วหนีบ ทรงD-8pyu.jpg
 
+                let arrLoopUpdate = [
+                    // {
+                    //     model: app.models.Scuser,
+                    //     sql: "select * from users where deleted_at is null",
+                    //     container: "users",
+                    //     keyName: "image_card_no_path",
+                    //     haveGallery: false,
+                    //     keyGallery: "",
+                    // },
+                    // {
+                    //     model: app.models.Categories,
+                    //     sql: "select * from categories where deleted_at is null",
+                    //     container: "categories",
+                    //     keyName: "image_icon",
+                    //     haveGallery: false,
+                    //     keyGallery: "",
+                    // },
+                    {
+                        model: app.models.Products,
+                        sql: "select * from products where deleted_at is null and id > 333",
+                        container: "products",
+                        keyName: "logo_path",
+                        haveGallery: true,
+                        keyGallery: "image_gallery_path",
+                    }
+                ];
+
 
                 let fnBuildFile = async (container, fileName,) => {
                     let newFileName = Container.fnRandomFileName(fileName);
@@ -256,54 +301,63 @@ module.exports = function (Container) {
 
                     return {path: objPath.name, path_thumbnail: thumbnailName};
                 };
-                // let products = await sz.fnModelFind({}, app.models.Products);
-                let products = await sz.fnSqlQuery("select * from products where deleted_at is null and id >334", app.models.Products);
-                let multiFn = [];
-                let noFile = [];
-                for (let i in products) {
-                    let rowI = products[i];
-                    let container = 'products';
-                    let isUpdate = false, dataUpdate = {};
-                    if (rowI.image_gallery_path != null && rowI.image_gallery_path != '[]') {
-                        isUpdate = true;
-                        let arrPath = sz.fnStr2Json(rowI.image_gallery_path);
-                        let newGallery = [];
-                        for (let j in arrPath) {
-                            let rowJ = arrPath[j];
-                            let fileName = rowJ.path.replace('/api/containers/products/download/', '');
-                            let path = 'uploads/' + container + "/" + fileName;
-                            if (sz.fnCheckFileExists(path)) {
-                                let uploadFile = await fnBuildFile(container, fileName);
-                                newGallery.push({
-                                    path: container + "/" +uploadFile.path,
-                                    path_thumbnail: container + "/" +uploadFile.path_thumbnail,
-                                    order: rowJ.order,
-                                });
+                let fnUpFileToGoogle = async (option) => {
+                    let sql = option.sql;
+                    let model = option.model;
+                    let dataList = await sz.fnSqlQuery(sql, model);
+                    let noFile = [];
+                    let container = option.container;
+                    let keyName = option.keyName;
+                    for (let i in dataList) {
+                        let rowI = dataList[i];
+                        let isUpdate = false, dataUpdate = {};
+                        if (option.haveGallery) {
+                            if (rowI[option.keyGallery] !== null && rowI[option.keyGallery] !== '[]') {
+                                isUpdate = true;
+                                let arrPath = sz.fnStr2Json(rowI[option.keyGallery]);
+                                let newGallery = [];
+                                for (let j in arrPath) {
+                                    let rowJ = arrPath[j];
+                                    let fileName = rowJ.path.replace('/api/containers/' + container + '/download/', '');
+                                    let path = 'uploads/' + container + "/" + fileName;
+                                    if (sz.fnCheckFileExists(path)) {
+                                        let uploadFile = await fnBuildFile(container, fileName);
+                                        newGallery.push({
+                                            path: container + "/" + uploadFile.path,
+                                            path_thumbnail: container + "/" + uploadFile.path_thumbnail,
+                                            order: rowJ.order,
+                                        });
+                                    }
+                                }
+                                console.log(newGallery)
+                                dataUpdate[option.keyGallery] = sz.fnJson2Str(newGallery);
                             }
                         }
-                        console.log(newGallery)
-                        dataUpdate.image_gallery_path = sz.fnJson2Str(newGallery);
-                    }
-                    if (rowI.logo_path) {
-                        isUpdate = true;
-                        let fileName = rowI.logo_path.replace('/api/containers/products/download/', '');
-                        let path = 'uploads/' + container + "/" + fileName;
+                        if (rowI[keyName]) {
+                            isUpdate = true;
+                            let fileName = rowI[keyName].replace('/api/containers/' + container + '/download/', '');
+                            let path = 'uploads/' + container + "/" + fileName;
 
-                        if (sz.fnCheckFileExists(path)) {
-                            let uploadFile = await fnBuildFile(container, fileName);
-                            dataUpdate.logo_path = container + "/" +uploadFile.path;
-                        } else {
-                            noFile.push(fileName);
-                            dataUpdate.logo_path = null;
+                            if (sz.fnCheckFileExists(path)) {
+                                let uploadFile = await fnBuildFile(container, fileName);
+                                dataUpdate[keyName] = container + "/" + uploadFile.path;
+                            } else {
+                                noFile.push(fileName);
+                                dataUpdate[keyName] = null;
+                            }
+                        }
+                        if (isUpdate) {
+                            await sz.fnModelUpdate(rowI.id, dataUpdate, model)
                         }
                     }
-                    if (isUpdate) {
-                        await sz.fnModelUpdate(rowI.id, dataUpdate, app.models.Products)
-                    }
+                };
+                for (let i in arrLoopUpdate) {
+                    await fnUpFileToGoogle(arrLoopUpdate[i]);
                 }
+                // let products = await sz.fnModelFind({}, app.models.Products);
+
                 sz._20000({
                     files: data,
-                    no_file: noFile
                 });
             } catch (err) {
                 sz._50000(err);
@@ -311,22 +365,37 @@ module.exports = function (Container) {
         })();
     };
 
-    // Container.beforeRemote("upload", function (context, data, next) {
-    //   console.tag('beforeRemote upload').log(data);
-    //   next();
-    // });
 
     Container.beforeRemote("removeFile", function (context, data, next) {
-        let file = context.args;
-        let path = 'uploads/' + file.container + "/" + file.file;
-        let parts = path.split('.'),
-            extension = parts[parts.length - 1];
-        let origName = parts[parts.length - 2];
-        let pathThumbnail = origName + Container.key_thumbnail + '.' + extension;
-        sz.fnRemoveFile(pathThumbnail);
+
+        // let file = context.args;
+        // let path = 'uploads/' + file.container + "/" + file.file;
+        // let parts = path.split('.'),
+        //     extension = parts[parts.length - 1];
+        // let origName = parts[parts.length - 2];
+        // let pathThumbnail = origName + Container.key_thumbnail + '.' + extension;
+        // sz.fnRemoveFile(pathThumbnail);
+        (async () => {
+            let file = context.args;
+            try {
+                let fileName = file.container + "/" + file.file;
+                let res = await Container.fnDeleteFileGoogle(fileName);
+                next();
+            } catch (err) {
+                next(err);
+            }
+        })();
         next();
     });
 
+    // Container.beforeRemote("upload", function (context, data, next) {
+    //
+    // });
+
+    Container.beforeRemote("upload", function (context, data, next) {
+      console.tag('beforeRemote upload').log(context.req.body);
+      next();
+    });
     Container.afterRemote("upload", function (context, data, next) {
         (async () => {
             try {
@@ -339,7 +408,7 @@ module.exports = function (Container) {
                                 let path = 'uploads/' + file.container + "/" + file.name;
                                 let objPath = await Container.fnRenameFile(file.container, file.name);
                                 let thumbnailName = '';
-                                if (sz.fnCheckFileExists(path) && file.type.indexOf('image') > -1) {
+                                if (sz.fnCheckFileExists(objPath.path.replace('./', '')) && file.type.indexOf('image') > -1) {
                                     let spName = objPath.name.split('.');
                                     thumbnailName = spName[0] + Container.key_thumbnail + '.' + spName[1];
                                     console.log('thumbnailName:', thumbnailName)
@@ -352,9 +421,11 @@ module.exports = function (Container) {
                                 await Container.fnUploadToGoogle(file.container, objPath.path, objPath.name);
                                 data.google = {
                                     url: Container.url_google_file + file.container + '/' + objPath.name,
-                                    name: file.container + '/' + objPath.name,
+                                    name: objPath.name,
+                                    path: file.container + '/' + objPath.name,
                                     url_thumbnail: Container.url_google_file + file.container + '/' + thumbnailName,
-                                    name_thumbnail: file.container + '/' + thumbnailName,
+                                    name_thumbnail: thumbnailName,
+                                    path_thumbnail: file.container + '/' + thumbnailName,
                                 };
                             }
                         }
@@ -381,8 +452,12 @@ module.exports = function (Container) {
                 // let res = await sz.fnModelCreate(body, ADS, ts);
                 // await Transaction.commit();
                 // sz._20000(res);
-            } catch (err) {
 
+
+                // let fileName = file.container + "/" + file.file;
+                let res = await Container.fnDeleteFileGoogle(body.file_name);
+                sz._20000(res);
+            } catch (err) {
                 sz._50000(err);
             }
         })();

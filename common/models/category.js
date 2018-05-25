@@ -43,14 +43,17 @@ module.exports = function (Categories) {
     เช็คว่า path รูปเดิม มี thumbnail ไหม
      */
     Categories.fnSetPathImgThumb = (data, key) => {
-        let path = data[key];
-        path = Categories.fnCheckImagePath(path);
-        data[key] = path;
-        let pathThumb = null;
-        if (path) {
-            pathThumb = Categories.fnCheckImagePath(sz.fnGetPathImgThumb(path))
+        if (sz.checkData(data[key])) {
+            let path = app.models.Container.url_google_file + data[key];
+            // path = Products.fnCheckImagePath(path);
+            data[key] = path;
+            let pathThumb = null;
+            if (path) {
+                // pathThumb = Products.fnCheckImagePath(sz.fnGetPathImgThumb(path))
+                pathThumb = sz.fnGetPathImgThumb(path);
+            }
+            data[key + '_thumbnail'] = pathThumb;
         }
-        data[key + '_thumbnail'] = pathThumb;
         return data;
     };
 
@@ -216,6 +219,9 @@ module.exports = function (Categories) {
 
                 let res = await sz.fnModelUpdate(category_id, body, Categories, ts);
                 await Transaction.commit();
+
+                //เช็คเพื่อลบรูป from google
+                await app.models.Container.fnCheckDeleteFileGoogle(body.delete_file || null);
                 sz._20000(res);
             } catch (err) {
 

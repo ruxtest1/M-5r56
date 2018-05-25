@@ -31,14 +31,17 @@ module.exports = function (Products) {
     เช็คว่า path รูปเดิม มี thumbnail ไหม
      */
     Products.fnSetPathImgThumb = (data, key) => {
-        let path = data[key];
-        path = Products.fnCheckImagePath(path);
-        data[key] = path;
-        let pathThumb = null;
-        if (path) {
-            pathThumb = Products.fnCheckImagePath(sz.fnGetPathImgThumb(path))
+        if (sz.checkData(data[key])) {
+            let path = app.models.Container.url_google_file + data[key];
+            // path = Products.fnCheckImagePath(path);
+            data[key] = path;
+            let pathThumb = null;
+            if (path) {
+                // pathThumb = Products.fnCheckImagePath(sz.fnGetPathImgThumb(path))
+                pathThumb = sz.fnGetPathImgThumb(path);
+            }
+            data[key + '_thumbnail'] = pathThumb;
         }
-        data[key + '_thumbnail'] = pathThumb;
         return data;
     };
 
@@ -153,6 +156,10 @@ module.exports = function (Products) {
                 body.image_gallery_path = sz.fnJson2Str(body.image_gallery_path);
                 let res = await sz.fnModelUpdate(product_id, body, Products, ts);
                 await Transaction.commit();
+
+                //เช็คเพื่อลบรูป from google
+                await app.models.Container.fnCheckDeleteFileGoogle(body.delete_file || null);
+
                 sz._20000(res);
             } catch (err) {
 
@@ -339,7 +346,7 @@ module.exports = function (Products) {
                 };
                 filters.query.order = filters.query.order || ' name_th';
                 let data = await sz.fnModelFindPaging(filters);
-                for(let i in data.rows) {
+                for (let i in data.rows) {
                     let val = data.rows[i];
                     val = Products.fnSetPathImgThumb(val, 'logo_path');
                     val = Products.fnBuildProductPrice(val);

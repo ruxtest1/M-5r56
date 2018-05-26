@@ -1,0 +1,13 @@
+runtime: python27
+threadsafe: yes
+handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+- url: /
+  static_files: index.html
+  upload: index.html
+  secure: always
+- url: /(.*)
+  static_files: \1
+  upload: (.*)

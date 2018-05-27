@@ -342,7 +342,7 @@ module.exports = function (Products) {
                     model: Products,
                     ts: null,
                     query: req.query,
-                    and: null,
+                    and: ' and enabled = 1',
                 };
                 filters.query.order = filters.query.order || ' name_th';
                 let data = await sz.fnModelFindPaging(filters);

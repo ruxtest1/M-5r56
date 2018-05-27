@@ -69,14 +69,16 @@ module.exports = function (Categories) {
                 '    products a1 INNER JOIN `categories` a2\n' +
                 '    ON (a1.category_id = a2.id)\n' +
                 '  WHERE a1.deleted_at IS NULL\n' +
-                '    AND a2.parent = a.id) AS count_product\n' +
+                '    AND a2.parent = a.id' +
+                '   and a1.enabled = 1) AS count_product\n' +
                 'FROM\n' +
                 '  `categories` a\n' +
                 'WHERE 1\n' +
                 '  AND a.`deleted_at` IS NULL';
             sql += ' and (a.parent = 0 or a.parent is null)';
         } else {
-            sql = 'select a.*, (select count(a1.id) from products a1 where a1.deleted_at is null and a1.category_id=a.id) as count_product' +
+            sql = 'select a.*, (select count(a1.id) from products a1 where a1.deleted_at is null  and a1.enabled = 1 ' +
+                ' and a1.category_id=a.id) as count_product' +
                 ' from categories a where a.deleted_at is null';
             sql += ' and a.parent=' + parent;
         }
@@ -278,10 +280,12 @@ module.exports = function (Categories) {
         (async () => {
             try {
                 let limit = req.query.limit;
+                let take = req.query.take;
+                let skip = req.query.skip;
                 let page = req.query.page;
                 let filter = {
-                    limit: limit,
-                    skip: page * limit,
+                    limit: take,
+                    skip: skip,
                     where: {
                         deleted_at: null,
                         category_id: category_id,
@@ -289,10 +293,10 @@ module.exports = function (Categories) {
                     }
                 };
                 let data = await app.models.Products.find(filter);
-
+                let res = {totalCount: data.length, rows:[]};
                 for (let i in data) {
                     // data[i] = app.models.Products.fnSetPathImgThumb(data[i], 'logo_path');
-                    data[i] = app.models.Products.fnBuildProductPrice(data[i]);
+                    res.rows.push(app.models.Products.fnBuildProductPrice(data[i]));
                 }
                 // let sql = 'select * from products where deleted_at is null and enabled is true ';
                 // sql += ' and category_id=' + category_id;
@@ -300,7 +304,7 @@ module.exports = function (Categories) {
                 //
                 // let data = await sz.fnSqlQuery(sql, app.models.Products, false);
 
-                sz._20000(data);
+                sz._20000(res);
             } catch (err) {
                 sz._50000(err);
             }

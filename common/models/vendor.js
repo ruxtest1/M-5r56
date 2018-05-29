@@ -179,13 +179,13 @@ module.exports = function (Vendors) {
         data.file_certificate = sz.fnStr2Json(data.file_certificate);
         data.image_front_store_path = sz.fnStr2Json(data.image_front_store_path);
 
-        let pathImg = Vendors.pathFolderVendorImage;
-        if (data.image_card_no_path) {
-          let expImg = data.image_card_no_path.split('/');
-          let strPath = pathImg + expImg[expImg.length-1];
-          console.log(strPath)
-          data.image_card_no_path = sz.fnCheckFileExists(strPath) ? data.image_card_no_path : null;
-        }
+        // let pathImg = Vendors.pathFolderVendorImage;
+        // if (data.image_card_no_path) {
+        //   let expImg = data.image_card_no_path.split('/');
+        //   let strPath = pathImg + expImg[expImg.length-1];
+        //   console.log(strPath)
+        //   data.image_card_no_path = sz.fnCheckFileExists(strPath) ? data.image_card_no_path : null;
+        // }
         sz._20000(data);
       } catch (err) {
         sz._50000(err);

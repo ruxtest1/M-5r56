@@ -619,7 +619,7 @@ function fnSz() {
     } else {
       let multiFn = [
         this.fnSqlQuery(sql + where + order + limit, models, false),
-        this.fnSqlQuery(sql + (textSearch ? where : ''), models, false)
+        this.fnSqlQuery(sql + (where ? where : ''), models, false)
       ];
       let values = await this.fnPromiseAll(multiFn);
       res = values[0];

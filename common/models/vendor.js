@@ -90,6 +90,7 @@ module.exports = function (Vendors) {
         sz.Transaction = Transaction;
         console.time().file().tag('Transaction').log(Transaction);
         let ts = {transaction: Transaction};
+        body.username = body.email;
         console.log(body)
         let res = await sz.fnModelCreate(body, Vendors, ts);
         await Transaction.commit();

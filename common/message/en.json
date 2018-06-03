@@ -136,6 +136,10 @@
       "pledge": "เงินมัดจำ"
     }
   },
+  "Vendors": {
+    "not_found": "Vendor is not found.",
+    "you_cant_not_access": "Sorry, You can't access data."
+  },
   "member": {
     "not_found": "ไม่พบข้อมูลสมาชิก",
     "please_specify_an_old_password": "กรุณาระบุรหัสผ่านเก่า",

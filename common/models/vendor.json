@@ -55,6 +55,9 @@
     "file_certificate": {
       "type": "text"
     },
+    "profile_image": {
+      "type": "text"
+    },
     "image_card_no_path": {
       "type": "text"
     },

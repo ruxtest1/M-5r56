@@ -775,6 +775,8 @@ module.exports = function (Scuser) {
                     // result.member.building_id = contract.building_id;
                     // result.member.property_id = contract.property_id;
                     // result.member.contract_id = contract.id;
+                } else if (isVendor) {
+                    result.vendor = await sz.fnFindOne({user_id: user_id}, app.models.Vendors);
                 }
                 result.role = roleData;
                 sz._20000(result);

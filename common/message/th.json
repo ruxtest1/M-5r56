@@ -136,6 +136,10 @@
       "pledge": "เงินมัดจำ"
     }
   },
+  "Vendors": {
+    "not_found": "ไม่พบข้อมูลตัวแทน",
+    "you_cant_not_access": "ขออภับ คุณไม่มีสิทธิ์แก้ไขข้อมูล"
+  },
   "member": {
     "not_found": "ไม่พบข้อมูลสมาชิก",
     "please_specify_an_old_password": "กรุณาระบุรหัสผ่านเก่า",

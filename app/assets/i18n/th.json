@@ -80,6 +80,7 @@
   "MAP": "แผนที่บริษัท",
   "VENDOR_REGISTER": "สมัครตัวแทน",
   "USER_IS_NOT_VENDOR": "ข้อมูลผู้ใช้งาน ไม่ใช่ตัวแทนจำหน่าย",
+  "VENDOR_NOT_FOUND": "ไม่พบข้อมูลตัวแทน",
 
   "CATEGORY": "หมวดหมู่สินค้า",
 
@@ -163,5 +164,7 @@
   "SAVE_DATA_SUCCESS": "บันทึกข้อมูลสำเร็จ",
   "RESET_PASSWORD": "รีเซ็ตรหัสผ่าน",
   "AUTHORIZATION_REQUIRED": "กรุณาล็อคอินเข้าสู่ระบบอีกครั้ง",
-  "YOU_SESSION_EXPIRE": "Session คุฒหมดอายุ กรุณาล็อคอินเข้าสู่ระบบอีกครั้ง"
+  "YOU_SESSION_EXPIRE": "Session คุฒหมดอายุ กรุณาล็อคอินเข้าสู่ระบบอีกครั้ง",
+  "TEXT_SEARCH_NOT_NULL": "กรุณากรอกข้อความเพื่อค้นหา",
+  "CLEAR_HISTORY": "ลบประวัติค้นหา"
 }

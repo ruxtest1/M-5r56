@@ -100,7 +100,8 @@
   "WEB_SITE": "Web Site",
   "MAP": "Map",
   "VENDOR_REGISTER": "Vendor Register",
-  "USER_IS_NOT_VENDOR": "User is not a reseller.",
+  "USER_IS_NOT_VENDOR": "User is not a seller.",
+  "VENDOR_NOT_FOUND": "Can't find seller.",
 
   "CATEGORY": "Categories",
 
@@ -181,5 +182,7 @@
   "SAVE_DATA_SUCCESS": "Save data success.",
   "RESET_PASSWORD": "Reset Password",
   "AUTHORIZATION_REQUIRED": "Authorization required.",
-  "YOU_SESSION_EXPIRE": "Your session expired, Please login again."
+  "YOU_SESSION_EXPIRE": "Your session expired, Please login again.",
+  "TEXT_SEARCH_NOT_NULL": "Please insert text for search.",
+  "CLEAR_HISTORY": "Clear History"
 }

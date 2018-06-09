@@ -129,7 +129,7 @@ function fnSz() {
     else return this.r._40401;
   };
   this.fnDataNotFound = async function (data, msg) {
-    console.file().time().tag("fnDataNotFound").log(data);
+    // console.file().time().tag("fnDataNotFound").log(data);
     msg = msg || 'Data not found'
     if (!this.checkData(data)) {
       var err = new Error(msg);

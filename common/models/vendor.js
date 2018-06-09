@@ -251,6 +251,31 @@ module.exports = function (Vendors) {
             }
         })();
     };
+    Vendors.rmVendorForgetPassword = function (body, req,  cb) {
+        console.file().time().tag("body").log(body);
+        // let sz = new fnSz.fnSz();
+        sz.cb = cb;
+        (async () => {
+            try {
+                let email = body.email;
+                await sz.fnDataNotFound(email, 'PLEASE_ADD_EMAIL');
+
+                let vendor = await sz.fnFindOne({email: email}, Vendors);
+                await sz.fnDataNotFound(vendor, 'VENDOR_NOT_FOUND');
+
+                if (!sz.checkData(vendor.user_id)) {
+                    throw 'USER_NOT_FOUND';
+                }
+                let user = await sz.fnFindById(vendor.user_id, app.models.Scuser);
+                await sz.fnDataNotFound(user, 'USER_NOT_FOUND');
+
+                let res = await app.models.Scuser.fnResetPassword(body);
+                sz._20000(res);
+            } catch (err) {
+                sz._50000(err);
+            }
+        })();
+    };
 
     Vendors.rmVendorDelete = function (body, req, vendor_id, cb) {
         console.file().time().tag("body").log(body);
@@ -374,5 +399,14 @@ module.exports = function (Vendors) {
         ],
         returns: {arg: 'return', type: 'object', root: true},
         http: {path: '/:vendor_id/edit-profile', verb: 'put'}
+    });
+
+    Vendors.remoteMethod('rmVendorForgetPassword', {
+        accepts: [
+            {arg: 'body', type: 'object', http: {source: 'body'}},
+            {arg: 'req', type: 'object', http: {source: 'req'}},
+        ],
+        returns: {arg: 'return', type: 'object', root: true},
+        http: {path: '/forget-password', verb: 'post'}
     });
 };

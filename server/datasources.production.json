@@ -5,14 +5,13 @@
   },
   "mysql": {
     "name": "mysql",
-    "host": "35.200.220.75",
-    "port": 3306,
+    "host": "ruxnutt.thddns.net",
+    "port": 4940,
     "url": "",
     "database": "marukyo",
-    "user": "local",
-    "password": "h36qRXwgNF54",
-    "connector": "mysql",
-    "socketPath":"/cloudsql/marukyo-api:asia-south1:marukyo"
+    "user": "ruxchuk",
+    "password": "iydiydot00",
+    "connector": "mysql"
   },
   "mail": {
     "name": "mail",

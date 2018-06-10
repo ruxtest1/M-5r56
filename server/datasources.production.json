@@ -5,12 +5,12 @@
   },
   "mysql": {
     "name": "mysql",
-    "host": "ruxnutt.thddns.net",
-    "port": 4940,
+    "host": "35.200.220.75",
+    "port": 3306,
     "url": "",
     "database": "marukyo",
-    "user": "ruxchuk",
-    "password": "iydiydot00",
+    "user": "local",
+    "password": "h36qRXwgNF54",
     "connector": "mysql"
   },
   "mail": {

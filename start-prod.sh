@@ -8,9 +8,7 @@ export NODE_IP=$IP
 git pull
 
 #pm2 start server/server.js --name $NAME
-#pm2 start ecosystem.config.json --env=production
-npm start
-
+pm2 start ecosystem.config.json --env=production
 
 #gulp set config
 #node index.js

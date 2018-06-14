@@ -1,7 +1,7 @@
 {
   "restApiRoot": "/api",
   "host": "0.0.0.0",
-  "port": 8080,
+  "port": 4942,
   "remoting": {
     "context": false,
     "rest": {
@@ -21,8 +21,8 @@
     "handleErrors": false
   },
   "Image": {
-    "Resize": 400,
-    "Quality": 60
+    "Resize": 350,
+    "Quality": 100
   },
   "host_api": "http://localhost:4942/"
 }

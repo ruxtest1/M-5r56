@@ -10,11 +10,19 @@ let sz = new fnSz.fnSz();
 const fs = require('fs');
 var datastore = require('@google-cloud/datastore');
 var storage = require('@google-cloud/storage');
+const jsftp = require("jsftp");
+const Ftp = new jsftp({
+    host: "marukyo.co.th",
+    port: 21, // defaults to 21
+    user: "mkApp@marukyo.co.th", // defaults to "anonymous"
+    pass: "bM2pR2GQK5" // defaults to "@anonymous"
+});
 
 module.exports = function (Container) {
 
     Container.key_thumbnail = '-thumbnail';
     Container.url_google_file = 'https://storage.googleapis.com/marukyo-api/';
+    Container.url_ftp_file = 'http://www.marukyo.co.th/mk_app/uploads/';
     Container.google_bucket_name = 'marukyo-api';
 
     Container.fnResizeImg = (path) => {
@@ -25,11 +33,15 @@ module.exports = function (Container) {
                 resolve('no image');
             }
             let origName = parts[parts.length - 2];
-            Jimp.read(path).then(function (lenna) {
+            Jimp.read(path).then(async function (lenna) {
                 let pathThumbnail = origName + Container.key_thumbnail + '.' + extension;
                 // console.tag('pathThumbnail').log(pathThumbnail);
-                lenna.resize(app.get('Image').Resize, Jimp.AUTO)            // resize
-                    .quality(app.get('Image').Quality)                 // set JPEG quality
+                let width = app.get('Image').Resize,
+                    height = app.get('Image').Resize, //,Jimp.AUTO
+                    quality = app.get('Image').Quality
+                ;
+                lenna.resize(width, height)            // resize
+                    .quality(quality)                 // set JPEG quality
                     .exifRotate()
                     // .greyscale()                 // set greyscale
                     .write(pathThumbnail); // save
@@ -88,6 +100,29 @@ module.exports = function (Container) {
         });
     };
 
+    Container.fnDeleteFileFTP = async (fileName) => {
+        let fnDel = (file) => {
+            return new Promise(function (resolve, reject) {
+                Ftp.raw("dele", "/uploads/" + file, (err, data) => {
+                    if (!err) {
+                        console.log("File del successfully!");
+                        resolve(true);
+                    } else {
+                        console.log("File del fail!");
+                        resolve(false);
+                    }
+                });
+            });
+        };
+        if (sz.checkData(fileName)) {
+            for(let row of fileName) {
+                await fnDel(sz.fnGetPathImgThumb(row));
+                await fnDel(row);
+            }
+        }
+        return true;
+    };
+
     Container.fnDeleteFileGoogle = async (fileName) => {
         var gcs = storage({
             projectId: 'marukyo-api',
@@ -117,20 +152,128 @@ module.exports = function (Container) {
 
     Container.fnCheckDeleteFileGoogle = async (files) => {
         if (sz.checkData(files)) {
-            for(let file of files) {
+            for (let file of files) {
                 try {
                     await Container.fnDeleteFileGoogle(file);
-                } catch (err){
+                } catch (err) {
                     console.log('err:', err);
                 }
                 try {
                     await Container.fnDeleteFileGoogle(sz.fnGetPathImgThumb(file));
-                } catch (err){
+                } catch (err) {
                     console.log('err thumbnail:', err);
                 }
             }
         }
         return true;
+    };
+
+    Container.fnDownloadGoogle = async (container) => {
+        var gcs = storage({
+            projectId: Container.google_bucket_name,
+            keyFilename: './common/keys/marukyo-api-14f34710832c.json'
+        });
+        let bucketName = Container.google_bucket_name;
+        var bucket = gcs.bucket(bucketName);
+        if (!bucket) {
+            throw 'No Bucket for upload';
+            // let fnCreateBucket = ()=>{
+            //     return new Promise(function (resolve, reject) {
+            //         gcs.createBucket(container, function (err, bucket) {
+            //             if (!err) {
+            //                 resolve(bucket);
+            //             } else {
+            //                 reject(err)
+            //             }
+            //         });
+            //     });
+            // };
+            // bucket = await fnCreateBucket();
+        }
+        // console.tag('bucket:').log(bucket)
+        let destination = './uploads/' + container;
+        // let fnUpload = (p) => {
+        //     return new Promise(function (resolve, reject) {
+        //         bucket.upload(p, {destination: destination}, function (err, file) {
+        //             if (!err) {
+        //                 // console.log('file:', file)
+        //                 resolve(file);
+        //             } else {
+        //                 // console.log('error:', err)
+        //                 reject(err);
+        //             }
+        //         });
+        //     });
+        // };
+        // await fnUpload(path);
+        // // console.log('file', file)
+        // return destination;
+
+        let fnDownload = (name) => {
+            console.log("file name:", name);
+            return new Promise(function (resolve, reject) {
+                // Download a file from your bucket.
+                bucket.file(name).download({
+                    destination: 'uploads/' + name
+                }, function (err) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(true);
+                    }
+                });
+            });
+        };
+
+        let fnGetList = () => {
+            return new Promise(function (resolve, reject) {
+                // Download a file from your bucket.
+                bucket.getFiles({prefix: container + '/', delimiter: '/', autoPaginate: false}, function (err, files) {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(files);
+                    }
+                });
+            });
+        };
+        let list = await fnGetList();
+        let res = [];
+        for (let row of list) {
+            let result = await fnDownload(row.name);
+            res.push(result);
+        }
+        return res;
+//
+// // Streams are also supported for reading and writing files.
+//         var remoteReadStream = bucket.file('giraffe.jpg').createReadStream();
+//         var localWriteStream = fs.createWriteStream('/photos/zoo/giraffe.jpg');
+//         remoteReadStream.pipe(localWriteStream);
+//
+//         var localReadStream = fs.createReadStream('/photos/zoo/zebra.jpg');
+//         var remoteWriteStream = bucket.file('zebra.jpg').createWriteStream();
+//         localReadStream.pipe(remoteWriteStream);
+    };
+
+    Container.fnUploadFTP = async (container, path, fileName) => {
+        let buffer = fs.readFileSync(path);
+        let fnUpload = () => {
+            return new Promise(function (resolve, reject) {
+                Ftp.put(buffer, "/uploads/" + container + '/' + fileName, err => {
+                    if (!err) {
+                        console.log("File transferred successfully!");
+
+                        //remove temp
+                        fs.unlink(path);
+
+                        resolve(true);
+                    } else {
+                        reject(err);
+                    }
+                });
+            });
+        };
+        return fnUpload();
     };
 
     Container.fnUploadToGoogle = async (container, path, fileName) => {
@@ -235,6 +378,22 @@ module.exports = function (Container) {
         });
     };
 
+    Container.rmDownloadGoogle = function (req, cb) {
+        sz.cb = cb;
+        console.file().time().tag("query str").log(req.query);
+        (async () => {
+            try {
+                let res = await Container.fnDownloadGoogle('users');
+                res = await Container.fnDownloadGoogle('vendor-files');
+                res = await Container.fnDownloadGoogle('vendor-images');
+                //res = await Container.fnDownloadGoogle('categories');
+                res = await Container.fnDownloadGoogle('products');
+                sz._20000(res);
+            } catch (err) {
+                sz._50000(err);
+            }
+        })();
+    };
     Container.rmCreateThumbAll = function (req, cb) {
         sz.cb = cb;
         console.file().time().tag("query str").log(req.query);
@@ -393,8 +552,8 @@ module.exports = function (Container) {
     // });
 
     Container.beforeRemote("upload", function (context, data, next) {
-      console.tag('beforeRemote upload').log(context.req.body);
-      next();
+        console.tag('beforeRemote upload').log(context.req.body);
+        next();
     });
     Container.afterRemote("upload", function (context, data, next) {
         (async () => {
@@ -413,17 +572,20 @@ module.exports = function (Container) {
                                     thumbnailName = spName[0] + Container.key_thumbnail + '.' + spName[1];
                                     console.log('thumbnailName:', thumbnailName)
                                     await Container.fnResizeImg(objPath.path.replace('./', ''));
+                                    await sz.fnSleep(100);
 
                                     let pathThumbnail = objPath.path.replace(objPath.name, thumbnailName);
                                     console.log('pathThumbnail:', pathThumbnail)
-                                    await Container.fnUploadToGoogle(file.container, pathThumbnail, thumbnailName);
+                                    // await Container.fnUploadToGoogle(file.container, pathThumbnail, thumbnailName);
+                                    await Container.fnUploadFTP(file.container, pathThumbnail, thumbnailName);
                                 }
-                                await Container.fnUploadToGoogle(file.container, objPath.path, objPath.name);
+                                // await Container.fnUploadToGoogle(file.container, objPath.path, objPath.name);
+                                await Container.fnUploadFTP(file.container, objPath.path, objPath.name);
                                 data.google = {
-                                    url: Container.url_google_file + file.container + '/' + objPath.name,
+                                    url: Container.url_ftp_file + file.container + '/' + objPath.name,
                                     name: objPath.name,
                                     path: file.container + '/' + objPath.name,
-                                    url_thumbnail: thumbnailName ? Container.url_google_file + file.container + '/' + thumbnailName : thumbnailName,
+                                    url_thumbnail: thumbnailName ? Container.url_ftp_file + file.container + '/' + thumbnailName : thumbnailName,
                                     name_thumbnail: thumbnailName,
                                     path_thumbnail: thumbnailName ? file.container + '/' + thumbnailName : thumbnailName,
                                 };
@@ -463,6 +625,19 @@ module.exports = function (Container) {
         })();
     };
 
+    Container.rmUploadFile = function (body, req, folder, cb) {
+        console.file().time().tag("body").log(body);
+        console.file().time().tag("query str").log(req.query);
+        sz.cb = cb;
+        (async () => {
+            try {
+                let res = {};
+                sz._20000(res);
+            } catch (err) {
+                sz._50000(err);
+            }
+        })();
+    };
 
     Container.remoteMethod('rmCreateThumbAll', {
         accepts: [
@@ -473,6 +648,15 @@ module.exports = function (Container) {
     });
 
 
+    Container.remoteMethod('rmDownloadGoogle', {
+        accepts: [
+            {arg: 'req', type: 'object', http: {source: 'req'}},
+        ],
+        returns: {arg: 'return', type: 'object', root: true},
+        http: {path: '/download-google', verb: 'get'}
+    });
+
+
     Container.remoteMethod('rmRemoveFileGoogle', {
         accepts: [
             {arg: 'body', type: 'object', http: {source: 'body'}},
@@ -480,5 +664,15 @@ module.exports = function (Container) {
         ],
         returns: {arg: 'return', type: 'object', root: true},
         http: {path: '/remove-file', verb: 'post'}
+    });
+
+    Container.remoteMethod('rmUploadFile', {
+        accepts: [
+            {arg: 'body', type: 'object', http: {source: 'body'}},
+            {arg: 'req', type: 'object', http: {source: 'req'}},
+            {arg: 'folder', type: 'string', required: true}
+        ],
+        returns: {arg: 'return', type: 'object', root: true},
+        http: {path: '/:folder/up', verb: 'post'}
     });
 };

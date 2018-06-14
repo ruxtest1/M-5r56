@@ -1155,7 +1155,13 @@ function fnSz() {
       }
     })
   };
-
+    this.fnSleep = (sec) => {
+        return new Promise(function (resolve, reject) {
+            setTimeout(() => {
+                resolve(true);
+            }, sec);
+        });
+    };
   this.fnCheckFileExists = (pathFile) => {
     try {
       let pathToRoot = '../../';

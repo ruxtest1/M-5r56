@@ -196,6 +196,9 @@ module.exports = function (Categories) {
                 let ts = {transaction: Transaction};
                 let res = await sz.fnModelCreate(body, Categories, ts);
                 await Transaction.commit();
+
+                //เช็คเพื่อลบรูป
+                await app.models.Container.fnDeleteFileFTP(body.delete_file || null);
                 sz._20000(res);
             } catch (err) {
 
@@ -222,8 +225,8 @@ module.exports = function (Categories) {
                 let res = await sz.fnModelUpdate(category_id, body, Categories, ts);
                 await Transaction.commit();
 
-                //เช็คเพื่อลบรูป from google
-                await app.models.Container.fnCheckDeleteFileGoogle(body.delete_file || null);
+                //เช็คเพื่อลบรูป
+                await app.models.Container.fnDeleteFileFTP(body.delete_file || null);
                 sz._20000(res);
             } catch (err) {
 

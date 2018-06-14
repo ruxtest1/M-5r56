@@ -71,6 +71,9 @@ module.exports = function (Maps) {
         let ts = {transaction: Transaction};
         let res = await sz.fnModelCreate(body, Maps, ts);
         await Transaction.commit();
+
+          //เช็คเพื่อลบรูป
+          await app.models.Container.fnDeleteFileFTP(body.delete_file || null);
         sz._20000(res);
       } catch (err) {
 
@@ -96,6 +99,9 @@ module.exports = function (Maps) {
 
         let res = await sz.fnModelUpdate(map_id, body, Maps, ts);
         await Transaction.commit();
+
+          //เช็คเพื่อลบรูป
+          await app.models.Container.fnDeleteFileFTP(body.delete_file || null);
         sz._20000(res);
       } catch (err) {
 

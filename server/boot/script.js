@@ -94,6 +94,26 @@ module.exports = function (app) {
     'Scuser',
   ];
 
+  var fnCreateFolderUpload = () => {
+        var fs = require('fs');
+        var dirs = [
+            './uploads',
+            './uploads/ads-images',
+            './uploads/categories',
+            './uploads/maps',
+            './uploads/products',
+            './uploads/users',
+            './uploads/vendor-files',
+            './uploads/vendor-images',
+        ];
+        for(var i in dirs) {
+          var dir = dirs[i];
+            if (!fs.existsSync(dir)){
+                fs.mkdirSync(dir);
+            }
+        }
+    }
+
   async function loopScript() {
     try {
       let mg = await loopAutoMigrate(lbTables);
@@ -108,4 +128,5 @@ module.exports = function (app) {
   if (startScript) {
     loopScript();
   }
+    fnCreateFolderUpload();
 };

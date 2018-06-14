@@ -21,8 +21,8 @@
     "handleErrors": false
   },
   "Image": {
-    "Resize": 400,
-    "Quality": 60
+    "Resize": 350,
+    "Quality": 100
   },
   "host_api": "https://marukyo-api.appspot.com/"
 }

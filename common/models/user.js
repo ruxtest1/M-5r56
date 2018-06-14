@@ -484,8 +484,8 @@ module.exports = function (Scuser) {
 
                 await Transaction.commit();
 
-                //เช็คเพื่อลบรูป from google
-                await app.models.Container.fnCheckDeleteFileGoogle(body.delete_file || null);
+                //เช็คเพื่อลบรูป
+                await app.models.Container.fnDeleteFileFTP(body.delete_file || null);
                 sz._20000(res);
             } catch (err) {
 

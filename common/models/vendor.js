@@ -90,6 +90,9 @@ module.exports = function (Vendors) {
                 }
                 let res = await sz.fnModelCreate(body, Vendors, ts);
                 await Transaction.commit();
+
+                //เช็คเพื่อลบรูป
+                await app.models.Container.fnDeleteFileFTP(body.delete_file || null);
                 sz._20000(res);
             } catch (err) {
 
@@ -114,6 +117,9 @@ module.exports = function (Vendors) {
                 body.username = body.email;
                 console.log(body)
                 let res = await sz.fnModelCreate(body, Vendors, ts);
+
+                //เช็คเพื่อลบรูป
+                await app.models.Container.fnDeleteFileFTP(body.delete_file || null);
                 await Transaction.commit();
                 sz._20000(res);
             } catch (err) {
@@ -192,8 +198,8 @@ module.exports = function (Vendors) {
                 //ส่งอีเมลเพื่อยืนยันให้ ตัวแทน
                 await Vendors.fnSendEmailVendorRegister(body);
 
-                //เช็คเพื่อลบรูป from google
-                await app.models.Container.fnCheckDeleteFileGoogle(body.delete_file || null);
+                //เช็คเพื่อลบรูป
+                await app.models.Container.fnDeleteFileFTP(body.delete_file || null);
                 sz._20000(res);
             } catch (err) {
 
@@ -243,8 +249,8 @@ module.exports = function (Vendors) {
 
                 let res = await sz.fnFindById(vendor_id, Vendors, null, false);
 
-                    //เช็คเพื่อลบรูป from google
-                await app.models.Container.fnCheckDeleteFileGoogle(body.delete_file || null);
+                    //เช็คเพื่อลบรูป
+                await app.models.Container.fnDeleteFileFTP(body.delete_file || null);
                 sz._20000(res);
             } catch (err) {
                 sz._50000(err);

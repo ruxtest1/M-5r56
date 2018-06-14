@@ -80,6 +80,9 @@ module.exports = function (Products) {
                 body.image_gallery_path = sz.fnJson2Str(body.image_gallery_path);
                 let res = await sz.fnModelCreate(body, Products, ts);
                 await Transaction.commit();
+
+                //เช็คเพื่อลบรูป
+                await app.models.Container.fnDeleteFileFTP(body.delete_file || null);
                 sz._20000(res);
             } catch (err) {
 
@@ -157,8 +160,8 @@ module.exports = function (Products) {
                 let res = await sz.fnModelUpdate(product_id, body, Products, ts);
                 await Transaction.commit();
 
-                //เช็คเพื่อลบรูป from google
-                await app.models.Container.fnCheckDeleteFileGoogle(body.delete_file || null);
+                //เช็คเพื่อลบรูป
+                await app.models.Container.fnDeleteFileFTP(body.delete_file || null);
 
                 sz._20000(res);
             } catch (err) {

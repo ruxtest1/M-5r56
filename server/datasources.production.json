@@ -5,12 +5,12 @@
   },
   "mysql": {
     "name": "mysql",
-    "host": "us-cdbr-iron-east-04.cleardb.net",
+    "host": "localhost",
     "port": 3306,
     "url": "",
-    "database": "heroku_96221d6e893e150",
-    "user": "b109d30690c52f",
-    "password": "d8bb3d36",
+    "database": "marukyo",
+    "user": "marukyo",
+    "password": "",
     "connector": "mysql"
   },
   "mail": {

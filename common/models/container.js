@@ -572,7 +572,7 @@ module.exports = function (Container) {
                                     thumbnailName = spName[0] + Container.key_thumbnail + '.' + spName[1];
                                     console.log('thumbnailName:', thumbnailName)
                                     await Container.fnResizeImg(objPath.path.replace('./', ''));
-                                    await sz.fnSleep(100);
+                                    await sz.fnSleep(200);
 
                                     let pathThumbnail = objPath.path.replace(objPath.name, thumbnailName);
                                     console.log('pathThumbnail:', pathThumbnail)
